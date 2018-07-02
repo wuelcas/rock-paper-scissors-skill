@@ -1,26 +1,11 @@
-# rock-paper-scissors
+# Rock Paper Scissors Skill
 
-### Development Setup
+This skill is for teaching purposes for the [blog post/tutorial to get started developing Alexa skills with Voxa.](https://medium.com/@wuelber.castillo/getting-started-with-voxa-creating-an-alexa-skill-part-3-256f774a6cb5)
 
-* Install and use Node v4.3.2
-* Run `npm install`
-* Edit `config/local.json` with all of the requisite fields.
+For the development setup you'll only need:
 
-`npm install` will install the project dependencies
+- Install and use Node ^v4.3.2
+- Run `npm install`
+
 `npm run watch` will start the server and watch for changes.
-
-
-### Directory Structure
-
-	`config/` -> Environment variables or configuration
-	`services/` -> API clients, Authentications and Extras
-	`skill/` -> Amazon Echo Skill login, the state machine and flow
-	`speechAssets/` -> Amazon Echo Utterances, Intent Schema and Custom Slots.
-	`tests/` -> Unit Tests
-	`server.js` -> Development server.
-	`gulpfile.js` -> Gulp tasks
-	`serverless.yml` -> Serverless configuration
-	`package.json` -> Dependencies
-	`README.md`
-
 
