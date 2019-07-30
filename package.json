@@ -1,40 +1,39 @@
 {
-	"name": "rock-paper-scissors",
-	"version": "0.1.0",
-	"description": "",
-	"main": "gulpfile.js",
-	"scripts": {
-		"test": "mocha --recursive test/**/*.spec.js",
-		"watch": "node node_modules/gulp/bin/gulp.js watch",
-		"lint": "eslint config/ gulpfile.js services/ skill/ speechAssets/ test/ server.js"
-	},
-	"author": "Wuelber",
-	"engines": {
-		"node": "6.10"
-	},
-	"keywords": [
-		"alexa skill",
-		"skills",
-		"node.js 4.3.2",
-		"echo",
-		"amazon"
-	],
-	"license": "ISC",
-	"dependencies": {
-		"voxa": "^2.0.0",
-		"bluebird": "^3.3.5",
-		"lodash": "^4.17.4"
-	},
-	"devDependencies": {
-		"chai": "^3.5.0",
-		"eslint": "^3.15.0",
-		"eslint-config-airbnb-base": "^11.1.0",
-		"eslint-plugin-import": "^2.13.0",
-		"gulp": "^3.9.1",
-		"gulp-nodemon": "^2.0.7",
-		"mocha": "^3.2.0"
-	},
-	"directories": {
-		"test": "test"
-	}
+  "name": "rock-paper-scissors",
+  "version": "0.0.1",
+  "main": "src/app/index.js",
+  "scripts": {
+    "test": "mocha test/*.spec.* test/**/*.spec.*",
+    "watch": "nodemon --inspect server.js",
+    "lint": "eslint src/ test/ server.js"
+  },
+  "author": "Wuelber Castillo",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.326.0",
+    "lambda-log": "^2.0.0",
+    "lodash": "^4.17.11",
+    "prettier": "^1.17.0",
+    "voxa": "^3.1.0"
+  },
+  "devDependencies": {
+    "alexa-mime": "^0.0.6",
+    "ask-cli": "^1.7.2",
+    "chai": "^4.2.0",
+    "chalk": "^2.4.2",
+    "eslint": "^5.16.0",
+    "eslint-config-prettier": "^4.2.0",
+    "eslint-plugin-prettier": "^3.0.1",
+    "express": "^4.16.4",
+    "mocha": "^5.2.0",
+    "mocha-jenkins-reporter": "^0.4.0",
+    "mocha-junit-reporter": "^1.18.0",
+    "nock": "^10.0.0",
+    "nodemon": "^1.18.4",
+    "nyc": "^13.0.1",
+    "simple-mock": "^0.8.0"
+  },
+  "directories": {
+    "test": "test"
+  }
 }
