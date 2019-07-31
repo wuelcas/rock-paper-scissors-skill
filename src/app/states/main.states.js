@@ -2,11 +2,19 @@ const CHOICES = ["rock", "paper", "scissors"];
 
 function register(voxaApp) {
   voxaApp.onIntent("LaunchIntent", () => {
-    return { reply: "Welcome", to: "askHowManyWins" };
+    return {
+      flow: "continue",
+      reply: "Welcome",
+      to: "askHowManyWins",
+    };
   });
 
   voxaApp.onState("askHowManyWins", () => {
-    return { flow: "yield", reply: "AskHowManyWins", to: "getHowManyWins" };
+    return {
+      flow: "yield",
+      reply: "AskHowManyWins",
+      to: "getHowManyWins",
+    };
   });
 
   voxaApp.onState("getHowManyWins", voxaEvent => {
@@ -14,25 +22,44 @@ function register(voxaApp) {
       voxaEvent.model.wins = voxaEvent.intent.params.wins;
       voxaEvent.model.userWins = 0;
       voxaEvent.model.alexaWins = 0;
-      return { reply: "StartGame", to: "askUserChoice" };
+      return {
+        flow: "continue",
+        reply: "StartGame",
+        to: "askUserChoice",
+      };
     }
   });
 
   voxaApp.onState("askUserChoice", voxaEvent => {
-    if (parseInt(voxaEvent.model.userWins) >= parseInt(voxaEvent.model.wins)) {
-      return { reply: "UserWinsTheGame", to: "askIfStartANewGame" };
+    const userWon = parseInt(voxaEvent.model.userWins) >= parseInt(voxaEvent.model.wins);
+    const alexaWon = parseInt(voxaEvent.model.alexaWins) >= parseInt(voxaEvent.model.wins);
+
+    if (userWon) {
+      return {
+        flow: "continue",
+        reply: "UserWinsTheGame",
+        to: "askIfStartANewGame",
+      };
     }
 
-    if (parseInt(voxaEvent.model.alexaWins) >= parseInt(voxaEvent.model.wins)) {
-      return { reply: "AlexaWinsTheGame", to: "askIfStartANewGame" };
+    if (alexaWon) {
+      return {
+        flow: "continue",
+        reply: "AlexaWinsTheGame",
+        to: "askIfStartANewGame",
+      };
     }
 
     const min = 0;
     const max = CHOICES.length - 1;
     voxaEvent.model.userChoice = undefined;
-    voxaEvent.model.alexaChoice =
-      Math.floor(Math.random() * (max - min + 1)) + min;
-    return { flow: "yield", reply: "AskUserChoice", to: "getUserChoice" };
+    voxaEvent.model.alexaChoice = Math.floor(Math.random() * (max - min + 1)) + min;
+
+    return {
+      flow: "yield",
+      reply: "AskUserChoice",
+      to: "getUserChoice",
+    };
   });
 
   voxaApp.onState("getUserChoice", voxaEvent => {
@@ -45,7 +72,10 @@ function register(voxaApp) {
     }
 
     if (voxaEvent.model.userChoice) {
-      return { to: "processWinner" };
+      return {
+        flow: "continue",
+        to: "processWinner",
+      };
     }
   });
 
@@ -55,7 +85,11 @@ function register(voxaApp) {
     let reply = "TiedResult";
 
     if (alexaChoice === userChoice) {
-      return { reply, to: "askUserChoice" };
+      return {
+        flow: "continue",
+        reply,
+        to: "askUserChoice",
+      };
     }
 
     if (alexaChoice === "rock") {
@@ -94,7 +128,11 @@ function register(voxaApp) {
       }
     }
 
-    return { reply, to: "askUserChoice" };
+    return {
+      flow: "continue",
+      reply,
+      to: "askUserChoice",
+    };
   });
 
   voxaApp.onState("askIfStartANewGame", () => {
@@ -107,20 +145,33 @@ function register(voxaApp) {
 
   voxaApp.onState("shouldStartANewGame", voxaEvent => {
     if (voxaEvent.intent.name === "YesIntent") {
-      return { reply: "RestartGame", to: "askHowManyWins" };
+      return {
+        flow: "continue",
+        reply: "RestartGame",
+        to: "askHowManyWins",
+      };
     }
 
     if (voxaEvent.intent.name === "NoIntent") {
-      return { flow: "terminate", reply: "Bye" };
+      return {
+        flow: "terminate",
+        reply: "Bye",
+      };
     }
   });
 
   voxaApp.onIntent("CancelIntent", () => {
-    return { flow: "terminate", reply: "Bye" };
+    return {
+      flow: "terminate",
+      reply: "Bye",
+    };
   });
 
   voxaApp.onIntent("StopIntent", () => {
-    return { flow: "terminate", reply: "Bye" };
+    return {
+      flow: "terminate",
+      reply: "Bye",
+    };
   });
 }
 
